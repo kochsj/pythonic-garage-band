@@ -1,9 +1,8 @@
 class Band:
-    band_members = []
 
     def __init__(self, name, members=[]):
         self.name = name
-        self.destroy_preface = 'I really like to destroy'
+        self.member_list = members
 
     def __repr__(self):
         return 'The ' + self.name + ' band.'
@@ -13,11 +12,11 @@ class Band:
 
     def play_solos(self):
         string = ''
-        for member in Band.band_members:
-            string += f"And now... {member} breaks out into a solo!"
-
+        for member in self.member_list:
+            string += f"And now... {member} breaks out into a solo! "
+        return string
 a = Band('Nirvana', ['Kurt', 'David'])
-print(a)
+print(a.play_solos())
 
 
 
