@@ -106,6 +106,16 @@ Bassist: Ben Shepherd,
 Drummer: Matt Cameron,
 Bassist: Hiro Yamamoto"""
     assert format_data_for_bands(data) == ['Soundgarden', ['Vocals', 'Chris Cornell'], ['Guitarist', 'Kim Thayil'], ['Bassist', 'Ben Shepherd'], ['Drummer', 'Matt Cameron'], ['Bassist', 'Hiro Yamamoto']]
+
+def test_create_band_from_data_method():
+    data ="""Soundgarden,
+Vocals: Chris Cornell,
+Guitarist: Kim Thayil,
+Bassist: Ben Shepherd,
+Drummer: Matt Cameron,
+Bassist: Hiro Yamamoto"""
+    band_from_data = Band.create_from_data(data)
+    assert isinstance(band_from_data, Band)
 # Each kind of Musician instance should have appropriate __str__ and __repr__ methods.
 
 # Each kind of Musician instance should have a get_instrument method that returns string.

@@ -72,17 +72,17 @@ class Band:
         return cls.list_of_bands
 
     @staticmethod
-    def create_from_data(data):
-        artists = data[1]
-        for i in range(len(data[1])):
-            if artists[i][0].lower() == 'bassist':
-                Bassist(artists[i][1], data[0])
-            elif artists[i][0].lower() == 'guitarist':
-                Guitarist(artists[i][1], data[0])
-            elif artists[i][0].lower() == 'drummer':
-                Drummer(artists[i][1], data[0])
+    def create_from_data(band_info_data):
+        data = format_data_for_bands(band_info_data)
+        for i in range(1, len(data[1])):
+            if data[i][0].lower() == 'bassist':
+                Bassist(data[i][1], data[0])
+            elif data[i][0].lower() == 'guitarist':
+                Guitarist(data[i][1], data[0])
+            elif data[i][0].lower() == 'drummer':
+                Drummer(data[i][1], data[0])
             else:
-                Singer(artists[i][1], data[0])
+                Singer(data[i][1], data[0])
 
         return Band(data[0], data[1])
 
