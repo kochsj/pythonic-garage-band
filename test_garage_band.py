@@ -89,12 +89,6 @@ def test_no_bands_out_of_order():
     actual = Band.to_list() == [['Alice in Chains', ['Jerry']], ['Nirvana', ['Kurt', 'David']]]
     assert expected == actual
 
-def test_this():
-    assert Singer('kurt', 'nirvana').name == 'kurt'
-
-def test_this_too():
-    Singer('kurt', 'nirvana')
-    assert Musician.list_of_artists == [['kurt', 'nirvana', 'vocals']]
 # A Band should have a static method create_from_data which takes a collection of formatted data and returns a created Band instance.
 def test_formatting_of_data():
     data ="""Soundgarden,
@@ -128,14 +122,7 @@ Bassist: Hiro Yamamoto"""
     band_from_data = Band.create_from_data(data)
     assert isinstance(band_from_data, Band)
 
-# The Band instance should have its members be set to musicians based on info from the input.
-def test_one_member_assigned_to_instance_of_musician():
-    data ="""Nirvana,
-Vocals: Kurt"""
-
-# Each kind of Musician instance should have a get_instrument method that returns string.
-# Each kind of Musician instance should have a play_solo method that returns string.
 @pytest.fixture(autouse=True)
 def clean():
     Band.list_of_bands = []
-    Musician.list_of_artists = []
+    Band.list_of_artists = []
