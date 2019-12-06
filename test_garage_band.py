@@ -12,6 +12,11 @@ def test_name_is_string():
     actual = isinstance((Band('Nirvana').name), str)
     assert expected == actual
 
+def test_name_is_exact_string():
+    expected = 'Soundgarden'
+    actual = Band('Soundgarden').name
+    assert expected == actual
+
 # A Band instance should have a members attribute which is a list of instances that inherit from Musician base (or super) class.
 # A Band instance should have a play_solos method that asks each member musician to play a solo, in the order they were added to band.
 # A Band instance should have appropriate __str__ and __repr__ methods.
