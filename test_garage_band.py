@@ -18,7 +18,7 @@ def test_name_is_exact_string():
     actual = Band('Soundgarden').name
     assert expected == actual
 
-# A Band instance should have a members attribute which is a list of instances that inherit from Musician base (or super) class.
+# # A Band instance should have a members attribute which is a list of instances that inherit from Musician base (or super) class.
 def test_members_attribute():
     expected = ['Kurt']
     actual = Band('Nirvana', ['Kurt']).member_list
@@ -91,6 +91,19 @@ def test_no_bands_out_of_order():
 
 # A Band should have a static method create_from_data which takes a collection of formatted data and returns a created Band instance. The Band instance should have its members be set to musicians based on info from the input.
 
+# def test_create_from_data():
+#     data = """
+#         Soundgarden,
+#         Chris Cornell,
+#         Kim Thayil,
+#         Ben Shepherd,
+#         Matt Cameron,
+#         Hiro Yamamoto
+#     """
+# Each kind of Musician instance should have appropriate __str__ and __repr__ methods.
+
+# Each kind of Musician instance should have a get_instrument method that returns string.
+# Each kind of Musician instance should have a play_solo method that returns string.
 @pytest.fixture(autouse=True)
 def clean():
     Band.list_of_bands = []

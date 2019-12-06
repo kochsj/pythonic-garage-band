@@ -1,10 +1,45 @@
+class Musician:
+    def __init__(self, band_name, artist_name, instrument):
+        self.name = artist_name
+        self.band = band_name
+        self.instrument = instrument
+
+    def __repr__(self):
+        return f"{self.name}"
+
+    def __str__(self):
+        return f"I, {self.name}, am a musician in {self.band}!"
+
+    def get_instrument(self):
+        return f"{self.name} would love get their {self.instrument} and play."
+
+    def play_solo(self):
+        return f"{self.name} finds their {self.instrument} and breaks out into a solo!"
+
+
+class Guitarist(Musician):
+    def __init__(self, artist_name, band_name):
+        super().__init__(band_name, artist_name, 'guitar')
+
+class Bassist(Musician):
+    def __init__(self, artist_name, band_name):
+        super().__init__(band_name, artist_name, 'bass')
+
+class Drummer(Musician):
+    def __init__(self, artist_name, band_name):
+        super().__init__(band_name, artist_name, 'drums')
+
+class Singer(Musician):
+    def __init__(self, artist_name, band_name):
+        super().__init__(band_name, artist_name, 'vocals')
+
 class Band:
 
     list_of_bands = []
-    def __init__(self, name, members=[]):
-        self.name = name
+    def __init__(self, band_name, members=[]):
+        self.name = band_name
         self.member_list = members
-        Band.list_of_bands.append([name, members])
+        Band.list_of_bands.append([band_name, members])
 
     def __repr__(self):
         return f"The band, {self.name}."
@@ -26,21 +61,18 @@ class Band:
     # def create_from_data(cls, data):
 
 
-
-
-# a = Band('Nirvana', ['Kurt', 'David'])
-# print(a)
-# print(Band.to_list())
-
-
-
-
 # - [x] A Band instance should have a name attribute which is a string.
 # - [x] A Band instance should have a members attribute which is a list of instances that inherit from Musician base (or super) class.
 # - [x] A Band instance should have a play_solos method that asks each member musician to play a solo, in the order they were added to band.
 # - [x] A Band instance should have appropriate __str__ and __repr__ methods.
 # - [x] A Band should have a class method to_list which returns a list of previously created Band instances
-# A Band should have a static method create_from_data which takes a collection of formatted data and returns a created Band instance. The Band instance should have its members be set to musicians based on info from the input.
+# A Band should have a static method create_from_data which takes a collection of formatted data and returns a created Band instance.
+#
+# The Band instance should have its members be set to musicians based on info from the input.
+
+# Musician Subclass Tests
+# - [x] Each kind of Musician instance should have appropriate __str__ and __repr__ methods.
+# - [] Each kind of Musician instance should have a get_instrument method that returns string.
+# - [] Each kind of Musician instance should have a play_solo method that returns string.
 
 
-# class Musician:
