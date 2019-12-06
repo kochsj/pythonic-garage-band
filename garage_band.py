@@ -1,3 +1,11 @@
+def format_data_for_bands(data):
+    data_list = data.split(',\n')
+    formatted_data = [data_list[0]]
+    for i in range(1, len(data_list)):
+        inst_artist = data_list[i].split(': ')
+        formatted_data.append(inst_artist)
+    return formatted_data
+
 class Musician:
 
     list_of_artists = []

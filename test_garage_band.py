@@ -1,5 +1,5 @@
 import pytest
-from garage_band import Band, Musician, Singer, Bassist, Guitarist, Drummer
+from garage_band import Band, Musician, Singer, Bassist, Guitarist, Drummer, format_data_for_bands
 
 def test_is_band():
     expected = True
@@ -98,15 +98,14 @@ def test_this_too():
 # A Band should have a static method create_from_data which takes a collection of formatted data and returns a created Band instance.
 # The Band instance should have its members be set to musicians based on info from the input.
 
-# def test_create_from_data():
-#     data = """
-#         Soundgarden,
-#         Chris Cornell,
-#         Kim Thayil,
-#         Ben Shepherd,
-#         Matt Cameron,
-#         Hiro Yamamoto
-#     """
+def test_formatting_of_data():
+    data ="""Soundgarden,
+Vocals: Chris Cornell,
+Guitarist: Kim Thayil,
+Bassist: Ben Shepherd,
+Drummer: Matt Cameron,
+Bassist: Hiro Yamamoto"""
+    assert format_data_for_bands(data) == ['Soundgarden', ['Vocals', 'Chris Cornell'], ['Guitarist', 'Kim Thayil'], ['Bassist', 'Ben Shepherd'], ['Drummer', 'Matt Cameron'], ['Bassist', 'Hiro Yamamoto']]
 # Each kind of Musician instance should have appropriate __str__ and __repr__ methods.
 
 # Each kind of Musician instance should have a get_instrument method that returns string.
