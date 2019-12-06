@@ -18,6 +18,21 @@ def test_name_is_exact_string():
     assert expected == actual
 
 # A Band instance should have a members attribute which is a list of instances that inherit from Musician base (or super) class.
+def test_members_attribute():
+    expected = ['Kurt']
+    actual = Band('Nirvana', ['Kurt']).member_list
+    assert expected == actual
+
+def test_members_attr_two_members():
+    expected = ['Kurt', 'David']
+    actual = Band('Nirvana', ['Kurt', 'David']).member_list
+    assert expected == actual
+
+def test_members_attr_many_members():
+    expected = ['Chris Cornell', 'Kim Thayil', 'Ben Shepherd', 'Matt Cameron', 'Hiro Yamamoto']
+    actual = Band('Soundgarden', ['Chris Cornell', 'Kim Thayil', 'Ben Shepherd', 'Matt Cameron', 'Hiro Yamamoto']).member_list
+    assert expected == actual
+
 # A Band instance should have a play_solos method that asks each member musician to play a solo, in the order they were added to band.
 # A Band instance should have appropriate __str__ and __repr__ methods.
 # A Band should have a class method to_list which returns a list of previously created Band instances
