@@ -1,5 +1,5 @@
 import pytest
-from garage_band import Band
+from garage_band import Band, Musician, Singer, Bassist, Guitarist, Drummer
 
 def test_is_band():
     expected = True
@@ -89,7 +89,14 @@ def test_no_bands_out_of_order():
     actual = Band.to_list() == [['Alice in Chains', ['Jerry']], ['Nirvana', ['Kurt', 'David']]]
     assert expected == actual
 
-# A Band should have a static method create_from_data which takes a collection of formatted data and returns a created Band instance. The Band instance should have its members be set to musicians based on info from the input.
+def test_this():
+    assert Singer('kurt', 'nirvana').name == 'kurt'
+
+def test_this_too():
+    Singer('kurt', 'nirvana')
+    assert Musician.list_of_artists == [['kurt', 'nirvana', 'vocals']]
+# A Band should have a static method create_from_data which takes a collection of formatted data and returns a created Band instance.
+# The Band instance should have its members be set to musicians based on info from the input.
 
 # def test_create_from_data():
 #     data = """
@@ -107,3 +114,4 @@ def test_no_bands_out_of_order():
 @pytest.fixture(autouse=True)
 def clean():
     Band.list_of_bands = []
+    Musician.list_of_artists = []
