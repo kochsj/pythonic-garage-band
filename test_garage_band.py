@@ -34,6 +34,26 @@ def test_members_attr_many_members():
     assert expected == actual
 
 # A Band instance should have a play_solos method that asks each member musician to play a solo, in the order they were added to band.
+def test_solos_method_no_members():
+    expected = ''
+    actual = Band('Nirvana').play_solos()
+    assert expected == actual
+
+def test_solos_method_one_member():
+    expected = "And now... Kurt breaks out into a solo! "
+    actual = Band('Nirvana', ['Kurt']).play_solos()
+    assert expected == actual
+
+def test_solos_method_two_members():
+    expected = "And now... Kurt breaks out into a solo! And now... David breaks out into a solo! "
+    actual = Band('Nirvana', ['Kurt', 'David']).play_solos()
+    assert expected == actual
+
+def test_solos_method_many_members():
+    expected = "And now... Chris Cornell breaks out into a solo! And now... Kim Thayil breaks out into a solo! And now... Ben Shepherd breaks out into a solo! And now... Matt Cameron breaks out into a solo! And now... Hiro Yamamoto breaks out into a solo! "
+    actual = Band('Soundgarden', ['Chris Cornell', 'Kim Thayil', 'Ben Shepherd', 'Matt Cameron', 'Hiro Yamamoto']).play_solos()
+    assert expected == actual
+
 # A Band instance should have appropriate __str__ and __repr__ methods.
 # A Band should have a class method to_list which returns a list of previously created Band instances
 # A Band should have a static method create_from_data which takes a collection of formatted data and returns a created Band instance. The Band instance should have its members be set to musicians based on info from the input.
