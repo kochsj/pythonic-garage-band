@@ -1,9 +1,12 @@
 def format_data_for_bands(data):
     data_list = data.split(',\n')
+    list_of_artists_and_their_instrument = []
     formatted_data = [data_list[0]]
     for i in range(1, len(data_list)):
         inst_artist = data_list[i].split(': ')
-        formatted_data.append(inst_artist)
+        artist = [inst_artist[1], inst_artist[0]]
+        list_of_artists_and_their_instrument.append(artist)
+    formatted_data.append(list_of_artists_and_their_instrument)
     return formatted_data
 
 class Musician:
@@ -52,7 +55,10 @@ class Band:
     # The Band instance should have its members be set to musicians based on info from the input.
     def __init__(self, band_name, members=[]):
         self.name = band_name
-        self.member_list = members
+        member_names = []
+        for i in range(len(members)):
+            member_names.append(members[i])
+        self.member_list = member_names
         Band.list_of_bands.append([band_name, members])
 
     def __repr__(self):
@@ -64,7 +70,7 @@ class Band:
     def play_solos(self):
         string = ''
         for member in self.member_list:
-            string += f"And now... {member} breaks out into a solo! "
+            string += f"And now... {member[0]} breaks out into a solo! "
         return string
 
     @classmethod
@@ -74,15 +80,16 @@ class Band:
     @staticmethod
     def create_from_data(band_info_data):
         data = format_data_for_bands(band_info_data)
+        artists = data[1]
         for i in range(1, len(data[1])):
-            if data[i][0].lower() == 'bassist':
-                Bassist(data[i][1], data[0])
-            elif data[i][0].lower() == 'guitarist':
-                Guitarist(data[i][1], data[0])
-            elif data[i][0].lower() == 'drummer':
-                Drummer(data[i][1], data[0])
+            if artists[i][1].lower() == 'bassist':
+                Bassist(artists[i][0], data[0])
+            elif artists[i][1].lower() == 'guitarist':
+                Guitarist(artists[i][0], data[0])
+            elif artists[i][1].lower() == 'drummer':
+                Drummer(artists[i][0], data[0])
             else:
-                Singer(data[i][1], data[0])
+                Singer(artists[i][1], data[0])
 
         return Band(data[0], data[1])
 

@@ -42,17 +42,17 @@ def test_solos_method_no_members():
 
 def test_solos_method_one_member():
     expected = "And now... Kurt breaks out into a solo! "
-    actual = Band('Nirvana', ['Kurt']).play_solos()
+    actual = Band('Nirvana', [['Kurt']]).play_solos()
     assert expected == actual
 
 def test_solos_method_two_members():
     expected = "And now... Kurt breaks out into a solo! And now... David breaks out into a solo! "
-    actual = Band('Nirvana', ['Kurt', 'David']).play_solos()
+    actual = Band('Nirvana', [['Kurt'], ['David']]).play_solos()
     assert expected == actual
 
 def test_solos_method_many_members():
     expected = "And now... Chris Cornell breaks out into a solo! And now... Kim Thayil breaks out into a solo! And now... Ben Shepherd breaks out into a solo! And now... Matt Cameron breaks out into a solo! And now... Hiro Yamamoto breaks out into a solo! "
-    actual = Band('Soundgarden', ['Chris Cornell', 'Kim Thayil', 'Ben Shepherd', 'Matt Cameron', 'Hiro Yamamoto']).play_solos()
+    actual = Band('Soundgarden', [['Chris Cornell'], ['Kim Thayil'], ['Ben Shepherd'], ['Matt Cameron'], ['Hiro Yamamoto']]).play_solos()
     assert expected == actual
 
 # A Band should have a class method to_list which returns a list of previously created Band instances
@@ -96,8 +96,6 @@ def test_this_too():
     Singer('kurt', 'nirvana')
     assert Musician.list_of_artists == [['kurt', 'nirvana', 'vocals']]
 # A Band should have a static method create_from_data which takes a collection of formatted data and returns a created Band instance.
-# The Band instance should have its members be set to musicians based on info from the input.
-
 def test_formatting_of_data():
     data ="""Soundgarden,
 Vocals: Chris Cornell,
@@ -105,9 +103,22 @@ Guitarist: Kim Thayil,
 Bassist: Ben Shepherd,
 Drummer: Matt Cameron,
 Bassist: Hiro Yamamoto"""
-    assert format_data_for_bands(data) == ['Soundgarden', ['Vocals', 'Chris Cornell'], ['Guitarist', 'Kim Thayil'], ['Bassist', 'Ben Shepherd'], ['Drummer', 'Matt Cameron'], ['Bassist', 'Hiro Yamamoto']]
+    assert format_data_for_bands(data) == ['Soundgarden', [['Chris Cornell', 'Vocals'], ['Kim Thayil', 'Guitarist'], ['Ben Shepherd', 'Bassist'], ['Matt Cameron', 'Drummer'], ['Hiro Yamamoto', 'Bassist']]]
 
 def test_create_band_from_data_method():
+    data ="""Nirvana,
+Vocals: Kurt"""
+    band_from_data = Band.create_from_data(data)
+    assert isinstance(band_from_data, Band)
+
+def test_solos_method_from_data():
+    data ="""Nirvana,
+Vocals: Kurt"""
+    expected = "And now... Kurt breaks out into a solo! "
+    actual = Band.create_from_data(data).play_solos()
+    assert expected == actual
+
+def test_create_band_from_more_data_method():
     data ="""Soundgarden,
 Vocals: Chris Cornell,
 Guitarist: Kim Thayil,
@@ -116,7 +127,11 @@ Drummer: Matt Cameron,
 Bassist: Hiro Yamamoto"""
     band_from_data = Band.create_from_data(data)
     assert isinstance(band_from_data, Band)
-# Each kind of Musician instance should have appropriate __str__ and __repr__ methods.
+
+# The Band instance should have its members be set to musicians based on info from the input.
+def test_one_member_assigned_to_instance_of_musician():
+    data ="""Nirvana,
+Vocals: Kurt"""
 
 # Each kind of Musician instance should have a get_instrument method that returns string.
 # Each kind of Musician instance should have a play_solo method that returns string.
