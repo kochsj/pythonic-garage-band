@@ -4,10 +4,10 @@ class Band:
     def __init__(self, name, members=[]):
         self.name = name
         self.member_list = members
-        Band.list_of_bands.append(name)
+        Band.list_of_bands.append([name, members])
 
     def __repr__(self):
-        return 'The band, ' + self.name + '.'
+        return f"The band, {self.name}."
 
     def __str__(self):
         return f"We are the World's greatest band, {self.name}!"
@@ -22,13 +22,15 @@ class Band:
     def to_list(cls):
         return cls.list_of_bands
 
-    @classmethod
-    def create_from_data(cls, data):
+    # @staticmethod
+    # def create_from_data(cls, data):
 
 
-a = Band('Nirvana', ['Kurt', 'David'])
-print(a)
-print(Band.get_all_bands())
+
+
+# a = Band('Nirvana', ['Kurt', 'David'])
+# print(a)
+# print(Band.to_list())
 
 
 
