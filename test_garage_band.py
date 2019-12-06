@@ -1,3 +1,4 @@
+import pytest
 from garage_band import Band
 
 def test_is_band():
@@ -54,6 +55,42 @@ def test_solos_method_many_members():
     actual = Band('Soundgarden', ['Chris Cornell', 'Kim Thayil', 'Ben Shepherd', 'Matt Cameron', 'Hiro Yamamoto']).play_solos()
     assert expected == actual
 
-# A Band instance should have appropriate __str__ and __repr__ methods.
 # A Band should have a class method to_list which returns a list of previously created Band instances
+def test_no_previous_bands():
+    expected = []
+    actual = Band.to_list()
+    assert expected == actual
+
+def test_one_previous_band():
+    expected = [['Alice in Chains', ['Jerry']]]
+    Band('Alice in Chains', ['Jerry'])
+    actual = Band.to_list()
+    assert expected == actual
+
+def test_two_previous_bands():
+    expected = [['Alice in Chains', ['Jerry']], ['Nirvana', ['Kurt', 'David']]]
+    Band('Alice in Chains', ['Jerry'])
+    Band('Nirvana', ['Kurt', 'David'])
+    actual = Band.to_list()
+    assert expected == actual
+
+def test_many_previous_bands():
+    expected = [['Alice in Chains', ['Jerry']], ['Nirvana', ['Kurt', 'David']], ['Soundgarden', ['Chris Cornell', 'Kim Thayil', 'Ben Shepherd', 'Matt Cameron', 'Hiro Yamamoto']]]
+    Band('Alice in Chains', ['Jerry'])
+    Band('Nirvana', ['Kurt', 'David'])
+    Band('Soundgarden', ['Chris Cornell', 'Kim Thayil', 'Ben Shepherd', 'Matt Cameron', 'Hiro Yamamoto'])
+    actual = Band.to_list()
+    assert expected == actual
+
+def test_no_bands_out_of_order():
+    expected = False
+    Band('Nirvana', ['Kurt', 'David'])
+    Band('Alice in Chains', ['Jerry'])
+    actual = Band.to_list() == [['Alice in Chains', ['Jerry']], ['Nirvana', ['Kurt', 'David']]]
+    assert expected == actual
+
 # A Band should have a static method create_from_data which takes a collection of formatted data and returns a created Band instance. The Band instance should have its members be set to musicians based on info from the input.
+
+@pytest.fixture(autouse=True)
+def clean():
+    Band.list_of_bands = []
